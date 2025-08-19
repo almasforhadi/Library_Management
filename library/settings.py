@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import environ
+import dj_database_url
 
 
 env = environ.Env()
@@ -31,7 +32,6 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
@@ -92,15 +92,21 @@ WSGI_APPLICATION = 'library.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME':env('DB_NAME'),
+#         'USER':env('DB_USER'),
+#         'PASSWORD':env('DB_PASSWORD'),
+#         'HOST':env('DB_HOST'),
+#         'PORT':env('DB_PORT'),
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME':env('DB_NAME'),
-        'USER':env('DB_USER'),
-        'PASSWORD':env('DB_PASSWORD'),
-        'HOST':env('DB_HOST'),
-        'PORT':env('DB_PORT'),
-    }
+    'default': dj_database_url.config(
+        default=env('DATABASE_URL'),
+    )
 }
 
 

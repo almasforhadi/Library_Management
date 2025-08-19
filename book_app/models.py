@@ -14,7 +14,7 @@ class category_model(models.Model):
 class BookModel(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
-    images = models.ImageField(upload_to="meadia_file", blank=True, null=True)
+    images = models.ImageField(upload_to="media_file", blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.ForeignKey(category_model,on_delete=models.CASCADE)
 

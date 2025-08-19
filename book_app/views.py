@@ -7,8 +7,10 @@ from django.utils import timezone
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def review(request, book_id):
     book = get_object_or_404(BookModel, pk=book_id)
     if request.method == 'POST':
@@ -32,33 +34,37 @@ def details(request, id):
     return render(request, 'book_app/details.html', {'book': book_item,'all_comments':all_comments})
 
 
-
+@login_required
 def borrow(request, id):
-    book = BookModel.objects.get(pk=id)
-    balance = get_balance(request.user)
+    if request.user.is_autenticated:
+        book = BookModel.objects.get(pk=id)
+        balance = get_balance(request.user)
 
-    if balance < book.price:
-        messages.error(request,'You dont have enough balance to borrow this book.')
-        return render(request,'book_app/details.html',{'book': book})
-    
-    transactionModel.objects.create(
-        user=request.user,
-        transaction_type='BORROW',
-        amount=-book.price       # subtract instead of add
-    )
-    BorrowModel.objects.create(user = request.user, book = book)
-    send_mail(
-        subject='Borrowing book!',
-        message=f'Welcome! "{book.title}"  is borrowed successfully.',
-        from_email=settings.EMAIL_HOST_USER,
-        recipient_list=[request.user.email], 
-        fail_silently=False
-    )
-    messages.success(request,f'Borrowing book "{book.title}" request is successfully executed')
-    return redirect('profile')
+        if balance < book.price:
+            messages.error(request,'You dont have enough balance to borrow this book.')
+            return render(request,'book_app/details.html',{'book': book})
+        
+        transactionModel.objects.create(
+            user=request.user,
+            transaction_type='BORROW',
+            amount=-book.price       # subtract instead of add
+        )
+        BorrowModel.objects.create(user = request.user, book = book)
+        send_mail(
+            subject='Borrowing book!',
+            message=f'Welcome! "{book.title}"  is borrowed successfully.',
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[request.user.email], 
+            fail_silently=False
+        )
+        messages.success(request,f'Borrowing book "{book.title}" request is successfully executed')
+        return redirect('profile')
+    else:
+        return redirect('login')
 
 
 
+@login_required
 def return_book(request,id):
      borrow = BorrowModel.objects.get(pk=id)
      if borrow.returned_at:

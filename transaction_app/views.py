@@ -5,6 +5,7 @@ from django.db.models import Sum
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -26,6 +27,7 @@ def get_balance(user):
     return balance
 
 
+@login_required
 def deposit(request):
     if request.user.is_authenticated:
         if request.method == 'POST':

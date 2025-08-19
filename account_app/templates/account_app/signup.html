@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %} Profile {% endblock %}
+{% load static %}
+
+{% block content %}
+
+<div class="signup">
+    <form method='POST' style="width:60%; margin:auto">
+       <h2>Signup</h2>
+        {% csrf_token %}
+        <!--{{form | crispy}}-->
+        {% for fm in form %}
+          {{fm.label_tag}}
+          {{fm}}
+          {{fm.errors}}
+        {% endfor %}
+        <button class="btn btn-success mt-4">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

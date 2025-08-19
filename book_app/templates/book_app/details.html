@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %} {{ book.title }} - Details {% endblock %}
+{% load static %}
+{% block content %}
+
+{% if messages %}
+  <div class="msg">
+    {% for message in messages %}
+      <p style="color:red">{{ message }}</p>
+    {% endfor %}
+  </div>
+{% endif %}
+
+ <div class="container mt-5">
+        <img src="{{ book.images.url }}" alt="{{ book.title }}" style="max-width:300px;">
+        <h1>{{ book.title }}</h1>
+        <p><strong>Description:</strong> {{ book.description }}</p>
+        <p><strong>Price:</strong> ${{ book.price }}</p>
+        <p><strong>Category:</strong> {{ book.category.category_name }}</p>
+        <div class="d-flex justify-content-start gap-5">
+           <a href="{% url 'borrow' book.id %}" class="borrow-btn">Borrow</a>
+        </div>
+        <div>
+            {% if all_comments %}
+            <h4 style="margin-top:50px">User Reviews:</h4>
+               {% for cm in all_comments %}
+                  <b>{{cm.user.username}}</b><br>
+                 {{cm.review}}<br>
+                 {{cm.created_at}} <br><br>
+               {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+<div style="text-align: center;font-size:25px;background-color:wheat;width:30%;margin:auto;padding:5px;">
+    <a href="{% url 'home' %}">Back to Home</a>
+</div>
+
+
+{% endblock %}

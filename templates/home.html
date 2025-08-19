@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %} home {% endblock %}
+{% load static %}
+
+{% block content %}
+
+    <div class="parent-div">
+        <div class="div-left col-3">
+            {% for category in all_categories %}
+              <p><i class="fa-duotone fa-solid fa-circle-dot"></i><a href="{% url 'category_name' category.slug %}" class="category_btn">{{ category.category_name }}</a></p>
+            {% endfor %}
+        </div>
+        <div class="div-right col-8">
+              {% if filtered_books %}
+                    {% for book in filtered_books %}
+                    <div class="card" style="width: 18rem;">
+                      <img src="{{book.images.url}}" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">{{book.title}}</h5>
+                        <p class="card-text">{{book.description}}</p>
+                           <a href="{% url 'details' book.id %}" class="see-btn btn btn-primary">See Details</a>
+                      </div>
+                    </div>
+                    {% endfor %}
+              {% else %}
+                    {% for book in all_books %}
+                      <div class="card" style="width: 18rem;">
+                      <img src="{{book.images.url}}" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">{{book.title}}</h5>
+                        <p class="card-text">{{book.description | truncatewords:5}}</p>
+                           <a href="{% url 'details' book.id %}" class="see-btn btn btn-primary">See Details</a>                 
+                      </div>
+                    </div>
+                    {% endfor %}
+            {% endif %} 
+        </div>
+    </div>
+ 
+{% endblock %}

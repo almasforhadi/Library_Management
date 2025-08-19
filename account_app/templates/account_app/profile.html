@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %} Profile {% endblock %}
+{% load static %}
+
+{% block content %}
+{% if messages %}
+  <div class="msg">
+    {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+  </div>
+{% endif %}
+
+
+
+    <h2 style="text-align:center;">Welcome! {{user.username}} to the Profile_page</h2>
+    <h3 style="width:70%;margin:auto;text-align:center; background-color:rgb(57, 240, 154)">Your current balance is now {{balance}}</h3>
+
+<div class="all-table">
+
+    <div class="table-1">
+        <h3>Your transaction history</h3>
+
+      <table class="table" style="width:60%; padding:10px;margin:auto; margin-top:10px;">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Type</th>
+            <th scope="col">amount</th>
+            <th scope="col">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tx in transactions %}
+               <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{tx.transaction_type}}</td>
+                <td>{{tx.amount}}</td>
+                <td>{{tx.created_at | date:"Y-m-d H:i"}}</td>
+               </tr>
+            {% empty %}
+            <tr>
+              <td colspan="4">No transaction found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+
+
+    <div class="table-2">
+      <h3>Your Borrowing history</h3>
+      <table class="table" style="width:60%; padding:10px;margin:auto; margin-top:10px;">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Book_Title</th>
+            <th scope="col">Borrowed_at</th>
+            <th scope="col">Returned_at</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for br in borrows_history %}
+               <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{br.book.title}}</td>
+                <td>{{br.borrowed_at}}</td>
+                <td>{{br.returned_at}}</td>
+               </tr>
+            {% empty %}
+            <tr>
+              <td colspan="4">No borrows_history found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+     </table>
+    </div>
+  
+
+</div>
+
+
+<div class="borrow-books">
+    <h3>Borrowed Books</h3>
+
+    <div class="borrow-books-container">
+        {% for b in borrows %}
+            <div class="card">
+                <img src="{{b.book.images.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{b.book.title}}</h5>
+                    <p class="card-text">{{b.book.description}}</p>
+                    <div class="d-flex">
+                        <a href="{% url 'return_book' b.id %}" class="btn btn-danger">Return</a>
+                        <a href="{% url 'review' b.book.id %}" class="btn btn-success">Give review</a>
+                    </div>
+                </div> 
+            </div> 
+        {% empty %}
+            <p>No books borrowed</p>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

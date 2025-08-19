@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %} Review {% endblock %}
+{% load static %}
+
+{% block content %}
+
+    <form method='POST' style="width:60%; margin:auto">
+      <h2>Give your honest review</h2>
+        {% csrf_token %}
+        <!--{{form | crispy}}-->
+        {% for fm in form %}
+          {{fm.label_tag}}
+          {{fm}}
+          {{fm.errors}}
+        {% endfor %}
+        <button class="btn btn-success mt-4" style="width:100%">Submit</button>
+    </form>
+
+{% endblock %}

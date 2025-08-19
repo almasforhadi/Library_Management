@@ -1,0 +1,327 @@
+body
+{
+    min-height: 100vh;
+    background-color: lightyellow;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+main
+{
+    flex: 1;
+}
+footer
+{
+    background-color: rgb(2, 241, 210);
+    padding:10px;
+    width:100%;
+    color:white;
+    text-align: center;
+}
+/* navbar */
+.navbar-nav
+{
+    padding:5px;
+}
+.nav-link
+{
+    background-color: black !important;
+    color:white !important;
+}
+.nav-link:hover
+{
+    background-color: white !important;
+    color:goldenrod !important;
+}
+/* home */
+.parent-div
+{
+    display: flex;
+    justify-content: center;
+    gap:20px;
+    margin: 50px;
+    flex-wrap: wrap; 
+}
+.div-left,.div-right
+{
+    border-radius: 5px;
+    min-height: fit-content;
+    min-width: fit-content;
+    padding:30px 50px;
+    flex-wrap: wrap;
+    border:none;
+    background-color: aliceblue;
+    text-align: start;
+    flex: 1;
+}
+.div-left
+{
+    display: flex;
+    justify-content: center;
+    gap:30px;
+}
+.category_btn
+{
+    text-decoration: none;
+    font-size: 25px;
+}
+.div-right
+{
+    display: flex;
+    justify-content: center;
+    gap:20px;
+    
+}
+@media (max-width: 768px) {
+    .parent-div {
+        flex-direction: column; 
+        margin: 20px;
+    }
+    .div-left, 
+    .div-right {
+        width: 100%;  
+        padding: 15px;
+    }
+    .category_btn {
+        font-size: 20px;
+    }
+}
+.card
+{
+    background-color: white;
+    border:none;
+    box-shadow: 4px 4px 4px 4px rgb(27, 27, 27);
+}
+.card-img-top {
+    height: 200px;    
+    object-fit: cover;  
+}
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+.see-btn
+{
+    background-color: #00ff9d ;
+    color:black;
+    border:none;
+}
+.see-btn:hover
+{
+    background-color: wheat;
+    color:goldenrod;
+}
+.two-btn
+{
+   display: flex;
+   justify-content: space-between;
+}
+.review-btn,.borrow-btn
+{
+    text-decoration: none;
+    font-size: 18px;
+    background-color: rgb(45, 202, 45);
+    padding:4px;
+    border-radius: 5px ;
+}
+/* profile*/
+.borrow-books {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;     /* same as tables */
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #FFFFE0;
+    border-radius: 8px;
+    box-shadow: 4px 4px 4px 4px rgb(114, 108, 108);
+    overflow-y: auto;     /* scroll if many books */
+}
+
+.borrow-books h3 {
+    background-color: #fff;
+    color: black;
+    box-shadow: 4px 4px 4px 4px rgb(114, 108, 108);
+    padding: 10px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    text-align: center;
+    border-radius: 6px;
+}
+
+/* Grid layout for cards like table rows */
+.borrow-books-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+/* Cards same height for consistency */
+.card {
+    width: 100%;
+    height: 420px;   
+    box-shadow: 4px 4px 4px 4px rgba(24, 23, 23, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.card-text {
+    font-size: 14px;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-body .d-flex {
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+.all-table {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+}
+
+.table-1, .table-2,.borrow-books {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 4px 4px 4px 4px rgb(114, 108, 108);
+    width: 100%;
+    max-width: 900px;   /* prevents being too wide */
+    margin: auto;
+    align-items: center;
+    padding: 20px;
+    overflow-x: auto;   /* allows table scroll on small screens */
+    margin-bottom: 50px;
+}
+
+.table-1 h3, .table-2 h3, .borrow-books h3 {
+    background-color: #fff;
+    color: black;
+    box-shadow: 4px 4px 4px 4px rgb(114, 108, 108);
+    padding: 5px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    text-align: center;
+}
+
+/* Table responsive fix */
+.table {
+    width: 100% !important;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 8px;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+/* Mobile fix */
+@media (max-width: 768px) {
+    .table-1, .table-2 {
+        padding: 10px;
+    }
+    .table {
+        font-size: 14px;
+    }
+}
+
+/*account_app*/
+.login,.signup
+{
+    width:70%;
+    padding:10px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px 4px grey;
+    margin: auto;
+    margin-top: 30px;
+}
+.login button,.signup button
+{
+    width:100%;
+    border:none;
+}
+.login button:hover,.signup button:hover
+{
+    width:100%;
+    background-color: wheat;
+    color:goldenrod;
+}
+.msg {
+    background-color: #e6fff3;       /* হালকা সবুজ ব্যাকগ্রাউন্ড */
+    border: 2px solid #02c78d;       /* সুন্দর সবুজ বর্ডার */
+    width: 60%;
+    margin: 20px auto;
+    padding: 15px 20px;
+    border-radius: 8px;              /* কোণ গোল */
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+.msg p {
+    font-size: 18px;
+    font-style: italic;
+    color: #0a8f58;
+    margin: 0;
+}
+
+.msg::before {
+    content: "✔";
+    font-weight: bold;
+    color: #0a8f58;
+    font-size: 20px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

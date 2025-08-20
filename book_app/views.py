@@ -36,7 +36,7 @@ def details(request, id):
 
 @login_required
 def borrow(request, id):
-    if request.user.is_autenticated:
+    if request.user.is_authenticated:
         book = BookModel.objects.get(pk=id)
         balance = get_balance(request.user)
 

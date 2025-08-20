@@ -325,3 +325,29 @@ footer
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+.back-to-home
+{
+    text-align: center;
+    font-size:25px;
+    background-color:rgb(240, 170, 41);
+    width:30%;
+    padding:5px;
+    margin:auto;
+    margin-top:20vh;
+}
+.back-to-home a
+{
+    text-decoration: none;
+    color: #0a8f58;
+}
+.borrow-btn
+{
+    padding:10px 20px;
+    color:#0a8f58;
+    font-size: 22px;
+}
+.borrow-btn:hover,.back-to-home:hover
+{
+    background-color:#ffffff;
+    color:goldenrod;
+}
